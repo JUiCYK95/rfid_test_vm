@@ -13,6 +13,15 @@ npm run dev
 
 Danach `http://localhost:3000` öffnen. Die Startseite leitet zur mummentum-Variante unter `/c/vincent` weiter. Florian liegt unter `/c/florian`; das neutrale Beispielsprofil bleibt unter `/c/demo-karte` erreichbar.
 
+## Auf dem Handy als App öffnen
+
+Vincents Chat stellt ein Web-App-Manifest und ein mummentum-Icon bereit. Über eine öffentlich erreichbare HTTPS-Adresse kann `/c/vincent` zum Home-Bildschirm hinzugefügt und danach ohne Browserleiste gestartet werden:
+
+- **iPhone:** Den Chat in Safari öffnen, „Teilen“ → „Zu Home-Bildschirm hinzufügen“ wählen und „Als Web-App öffnen“ aktivieren.
+- **Android:** Den Chat in Chrome öffnen, im Menü „Zum Home-Bildschirm hinzufügen“ → „Installieren“ wählen.
+
+Beim Aufruf als gewöhnlicher Browser-Tab bleibt die Browserleiste sichtbar. Die App benötigt für Chat und Terminbuchung weiterhin eine Internetverbindung.
+
 ## Chatverhalten
 
 - **Fragen:** Veröffentlichtes Wissen wird direkt im Chat beantwortet. Für offene Fragen kann ein serverseitiger Modellanbieter über `.env.local` konfiguriert werden. Ohne Modell antwortet der Chat aus passenden freigegebenen Fragen und Antworten und sagt bei Wissenslücken klar, dass keine bestätigte Antwort vorliegt.
