@@ -235,6 +235,14 @@ export function ChatAssistant({
     { label: "Kontakt senden", message: "Bitte sende mir den Kontakt." },
     { label: "Termin buchen", message: "Ich möchte einen Termin buchen." },
   ];
+  const renderShortcuts = (className: string) => (
+    <div className={className} aria-label="Nachrichtenvorschläge">
+      {shortcuts.map(({ label, message }) => (
+        <button key={label} type="button" disabled={pending} onClick={() => void sendMessage(message)}>{label}<span aria-hidden="true">↗</span></button>
+      ))}
+    </div>
+  );
+  const showShortcuts = messages.length === 1;
 
   return (
     <main className="chat-page" data-theme={profile.chatTheme ?? "default"}>
@@ -251,7 +259,7 @@ export function ChatAssistant({
         </header>
 
         <div
-          className="message-list"
+          className={`message-list${profile.chatTheme === "mummentum-fusion" && showShortcuts ? " message-list-welcome" : ""}`}
           ref={listRef}
           onScroll={updateScrollPreference}
           aria-live="polite"
@@ -339,15 +347,10 @@ export function ChatAssistant({
               <div className="message-bubble typing-bubble"><i /><i /><i /></div>
             </div>
           )}
+          {profile.chatTheme === "mummentum-fusion" && showShortcuts && renderShortcuts("chat-shortcuts chat-shortcuts-in-thread")}
         </div>
 
-        {messages.length === 1 && (
-          <div className="chat-shortcuts" aria-label="Nachrichtenvorschläge">
-            {shortcuts.map(({ label, message }) => (
-              <button key={label} type="button" disabled={pending} onClick={() => void sendMessage(message)}>{label}<span aria-hidden="true">↗</span></button>
-            ))}
-          </div>
-        )}
+        {showShortcuts && renderShortcuts(profile.chatTheme === "mummentum-fusion" ? "chat-shortcuts chat-shortcuts-docked" : "chat-shortcuts")}
 
         {notice && <p className="chat-notice" role="status">{notice}</p>}
         <form className="composer" onSubmit={(event) => { event.preventDefault(); void sendMessage(); }}>
