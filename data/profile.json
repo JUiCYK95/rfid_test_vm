@@ -1,0 +1,367 @@
+{
+  "profiles": [
+    {
+      "slug": "florian",
+      "cardTokens": ["florian"],
+      "status": "published",
+      "isDemo": true,
+      "displayName": "Florian Schünemann",
+      "givenName": "Florian",
+      "familyName": "Schünemann",
+      "role": "KI-Experte & Gründer von Schunera",
+      "company": "Schunera",
+      "city": "Hannover",
+      "bio": "Florian Schünemann ist KI-Experte und Gründer von Schunera in Hannover. Er entwickelt, hostet und betreut KI-Agenten, Telefon-KI, Automatisierungen und Wissenssysteme. Zuvor war er Lead-Ingenieur in der Automobilbranche und arbeitete an Testautomatisierung.",
+      "email": "info@schunera.de",
+      "phone": "",
+      "website": "https://schunera.de",
+      "socialMedia": [
+        { "platform": "LinkedIn", "url": "https://www.linkedin.com/in/florianschuenemann" },
+        { "platform": "Instagram · @floknowsai", "url": "https://www.instagram.com/floknowsai" },
+        { "platform": "TikTok · @floknowsai", "url": "https://www.tiktok.com/@floknowsai" },
+        { "platform": "YouTube · @floknowsai", "url": "https://www.youtube.com/@floknowsai" }
+      ],
+      "address": {
+        "street": "Sonnenweg 32",
+        "postalCode": "30171",
+        "locality": "Hannover",
+        "country": "Deutschland"
+      },
+      "bookingOptions": [
+        {
+          "id": "erstgespraech",
+          "label": "Kostenloses Erstgespräch",
+          "description": "30 Minuten per Google Meet. Florian bestätigt den Termin anschließend per E-Mail.",
+          "durationMinutes": 30,
+          "url": "https://schunera.de/termin",
+          "provider": "schunera",
+          "privacyUrl": "https://schunera.de/datenschutz",
+          "active": true
+        }
+      ],
+      "offers": [
+        {
+          "id": "ki-agenten",
+          "title": "KI-Agenten",
+          "description": "Maßgeschneiderte digitale Mitarbeiter, die Aufgaben wie Recherche, Schreiben, Sortieren und Entscheiden selbstständig erledigen. Florian entwickelt, hostet und betreut sie.",
+          "active": true
+        },
+        {
+          "id": "telefon-ki",
+          "title": "Telefon-KI",
+          "description": "Eine Sprach-KI, die Anrufe rund um die Uhr entgegennimmt, zuhört, antwortet, Anfragen qualifiziert, Termine bucht und Routinefragen beantwortet.",
+          "active": true
+        },
+        {
+          "id": "automatisierung",
+          "title": "KI-Automatisierung",
+          "description": "Mit n8n verbundene Programme und Abläufe, die wiederkehrende Routinearbeit im Hintergrund übernehmen – von einzelnen Automationen bis zu durchgängigen Systemen.",
+          "active": true
+        },
+        {
+          "id": "wissenssysteme-hosting",
+          "title": "Wissenssysteme & Hosting",
+          "description": "Vernetztes Unternehmenswissen, das KI-Agenten aktuell abrufen können, inklusive Betrieb der Infrastruktur als laufender Service.",
+          "active": true
+        }
+      ],
+      "knowledge": [
+        {
+          "id": "erstgespraech",
+          "source": "Schunera Terminseite",
+          "version": "1",
+          "published": true,
+          "question": "Was passiert im Erstgespräch?",
+          "answer": "Im kostenlosen 30-minütigen Erstgespräch analysieren wir deine Situation, besprechen konkrete KI-Möglichkeiten und geben eine ehrliche Einschätzung. Der Termin ist unverbindlich und findet per Google Meet statt.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "terminbestaetigung",
+          "source": "Schunera Terminseite",
+          "version": "1",
+          "published": true,
+          "question": "Wann ist mein Termin bestätigt und wie bekomme ich den Google-Meet-Link?",
+          "answer": "Der Termin muss von dir und Florian per E-Mail bestätigt werden. Den Google-Meet-Link erhältst du nach der Bestätigung per E-Mail. Prüfe bei ausbleibender Nachricht auch den Spam-Ordner.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "gespraechsdauer",
+          "source": "Schunera Terminseite",
+          "version": "1",
+          "published": true,
+          "question": "Wie lange dauert das Erstgespräch?",
+          "answer": "Das Erstgespräch dauert 30 Minuten, ist kostenlos und unverbindlich.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "gespraechsformat",
+          "source": "Schunera Terminseite",
+          "version": "1",
+          "published": true,
+          "question": "Womit wird das Erstgespräch geführt?",
+          "answer": "Das Erstgespräch findet per Google Meet statt. Den Link erhältst du nach der Terminbestätigung per E-Mail.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "florian-profil",
+          "source": "Schunera – Startseite und Über mich (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Wer ist Florian Schünemann und was macht er?",
+          "answer": "Florian Schünemann ist KI-Experte und Gründer von Schunera. Er entwickelt, hostet und betreut KI-Systeme, die in Unternehmen produktiv laufen. Sein Schwerpunkt ist die praktische Umsetzung: vom Verständnis der Geschäftsprozesse über Entwicklung und Einführung bis zum laufenden Betrieb.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "florian-werdegang",
+          "source": "Schunera – Startseite und Über mich (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Wie verlief Florian Schünemanns beruflicher Werdegang?",
+          "answer": "2019 begann Florian sein Studium der Elektro- und Informationstechnik; 2022 schloss er es ab. ChatGPT war 2023 sein Einstieg in die intensive Beschäftigung mit KI. 2025 arbeitete er als Lead-Ingenieur in der Automobilbranche mit Verantwortung für Testautomatisierung und entwickelte parallel als Ein-Mann-Team ein eigenes KI-gestütztes Softwaresystem von der Architektur bis zum Livebetrieb. Seit 2026 ist er mit Schunera selbstständig. Die zuvor entwickelte Testautomatisierung läuft laut Website weiterhin.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "florian-ausbildung",
+          "source": "Schunera – Über mich (https://schunera.de/) und LinkedIn (https://www.linkedin.com/in/florianschuenemann)",
+          "version": "1",
+          "published": true,
+          "question": "Welche Ausbildung und Zertifizierung hat Florian?",
+          "answer": "Schunera nennt einen Studienabschluss in Elektro- und Informationstechnik im Jahr 2022. Auf Florians LinkedIn-Profil sind die Hochschule Hannover und der Zeitraum 2019–2022 mit der Note 1,3 angegeben. Dort ist außerdem das ISTQB Foundation Level aufgeführt, ausgestellt im Februar 2024.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "florian-sprachen",
+          "source": "LinkedIn-Profil von Florian Schünemann (https://www.linkedin.com/in/florianschuenemann)",
+          "version": "1",
+          "published": true,
+          "question": "Welche Sprachen spricht Florian?",
+          "answer": "Auf LinkedIn sind Deutsch als Muttersprache bzw. zweisprachig und Englisch als fließend angegeben.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "florian-unternehmen",
+          "source": "Schunera – Impressum (https://schunera.de/impressum)",
+          "version": "1",
+          "published": true,
+          "question": "Wer betreibt Schunera?",
+          "answer": "Im Impressum wird Schunera als Geschäftsbezeichnung und Florian Schünemann als Einzelunternehmer genannt.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "leistungen-agenten",
+          "source": "Schunera – Leistungen (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Was sind die KI-Agenten von Schunera?",
+          "answer": "Ein KI-Agent erledigt eine Aufgabe selbstständig von Anfang bis Ende: Er kann recherchieren, schreiben, sortieren und entscheiden, statt nur auf einen einzelnen Befehl zu antworten. Florian entwickelt maßgeschneiderte Agenten, hostet und betreut sie. Auf der Website nennt er OpenClaw, seinen eigenen Hermes Agent und Claude Code als Werkzeuge. Die Agenten sollen als digitale Mitarbeiter rund um die Uhr laufen.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "leistungen-telefon-ki",
+          "source": "Schunera – Leistungen (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Was macht die Telefon-KI von Schunera?",
+          "answer": "Die Sprach-KI nimmt Anrufe entgegen, hört zu, beantwortet Routinefragen, qualifiziert Anfragen und kann Termine buchen. Sie soll rund um die Uhr erreichbar sein und Anfragen auch dann bedienen, wenn Florian oder das Team gerade anderweitig beschäftigt sind.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "leistungen-automatisierung",
+          "source": "Schunera – Leistungen (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Wie automatisiert Schunera Geschäftsprozesse?",
+          "answer": "Florian verbindet mit n8n Programme und entwickelt Abläufe, die wiederkehrende Aufgaben im Hintergrund übernehmen. Das Angebot reicht laut Website von einer einzelnen Automation bis zu einem zusammenhängenden System, in dem Programme miteinander kommunizieren.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "leistungen-wissenssysteme",
+          "source": "Schunera – Leistungen (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Was bietet Schunera mit Wissenssystemen und Hosting an?",
+          "answer": "Schunera bündelt verteiltes Unternehmenswissen, vernetzt es und macht es für KI nutzbar. Dadurch können Agenten auf denselben aktuellen Wissensstand zugreifen. Florian betreibt die zugehörige Infrastruktur als laufenden Service.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "zusammenarbeit-prozess",
+          "source": "Schunera – Prozess (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Wie läuft eine Zusammenarbeit mit Florian ab?",
+          "answer": "Die Website beschreibt vier Schritte: Im Erstgespräch werden Business, Ziele und Probleme besprochen. Danach analysiert Florian die Prozesse und erstellt einen Report mit konkreten Empfehlungen. Anschließend setzt er die vereinbarten KI-Agenten, Telefon-KI oder Automatisierungen praktisch um. Danach bleibt er als Ansprechpartner für neue Tools, Updates, Optimierungen und den laufenden Betrieb.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "erstgespraech-ablauf",
+          "source": "Schunera – FAQ (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Wie läuft das Erstgespräch ab?",
+          "answer": "Das Erstgespräch dauert etwa 30 Minuten, ist kostenlos und unverbindlich. Laut FAQ findet es per Video-Call statt. Florian hört sich die Situation an und gibt eine erste Einschätzung. Für die Buchung über diese Karte ist Google Meet vorgesehen; den Link erhältst du nach der Terminbestätigung per E-Mail.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "preise-zusammenarbeit",
+          "source": "Schunera – FAQ (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Was kostet die Zusammenarbeit mit Schunera?",
+          "answer": "Schunera arbeitet mit flexiblen, stundenbasierten Preismodellen. Die genauen Konditionen werden individuell im Erstgespräch besprochen. Das Erstgespräch selbst ist kostenlos und unverbindlich.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "arbeitsort",
+          "source": "Schunera – FAQ (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Arbeitet Florian remote oder vor Ort?",
+          "answer": "Die Zusammenarbeit findet primär remote per Video-Call statt. Für Workshops oder Schulungen kommt Florian bei Bedarf auch vor Ort.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "projektstart",
+          "source": "Schunera – FAQ (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Wie schnell kann ein Projekt mit Schunera starten?",
+          "answer": "Der Start hängt von der aktuellen Auslastung ab. Ein möglicher Startzeitpunkt wird nach dem Erstgespräch besprochen.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "technisches-vorwissen",
+          "source": "Schunera – FAQ (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Brauche ich technisches Vorwissen?",
+          "answer": "Nein. Florian erklärt die Inhalte verständlich und passt sich dem Wissensstand seines Gegenübers an.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "unterscheidung-beratung",
+          "source": "Schunera – FAQ (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Was unterscheidet Florian von anderen Beratern?",
+          "answer": "Laut Schunera berät Florian nicht nur, sondern setzt auch selbst um. Als Ingenieur und Entwickler kann er Strategien entwickeln und direkt implementieren.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "betreuung-nach-projekt",
+          "source": "Schunera – FAQ (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Was passiert nach dem Projekt?",
+          "answer": "Florian bleibt Ansprechpartner. Schunera setzt laut FAQ auf langfristige Partnerschaften und unterstützt bei der schnellen Weiterentwicklung von KI.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "social-media-profile",
+          "source": "Schunera – Links-Seite (https://schunera.de/links)",
+          "version": "1",
+          "published": true,
+          "question": "Auf welchen Social-Media-Plattformen ist Florian?",
+          "answer": "Die offizielle Schunera-Links-Seite verlinkt Florians LinkedIn-Profil sowie Instagram, TikTok und YouTube unter dem Handle @floknowsai. Dort kannst du seine aktuellen Beiträge ansehen; die Links-Seite selbst gibt keine vollständige Übersicht der Posts.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "social-media-follower",
+          "source": "Schunera – Startseite (https://schunera.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Wie viele Social-Media-Follower hat Florian?",
+          "answer": "Die Schunera-Startseite zeigte beim Abruf am 23.09.2026 die Angabe „14,2k Follower“ neben @floknowsai. Die Website ordnet diese Zahl keinem bestimmten Netzwerk zu; sie kann sich ändern.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "guides-und-prompts",
+          "source": "Schunera – Guides und Gratis-Prompts (https://schunera.de/guide, https://schunera.de/gratis-prompts)",
+          "version": "1",
+          "published": true,
+          "question": "Welche Guides und kostenlosen KI-Ressourcen veröffentlicht Florian?",
+          "answer": "Schunera verlinkt Schritt-für-Schritt-Guides zu Loop Engineering für KI-Agenten, PDF-zu-Markdown und Tokenverbrauch, dem Taste Skill für bessere KI-generierte Websites, Claude Skills, Fotoorganisation mit Claude Cowork, einem Personal Coach in Claude Cowork, dem Humanizer-Skill und KI-gestützter Business-Ideenfindung. Kostenlose Prompts und Skills gibt es unter anderem für natürlicher klingende KI-Texte und einen Business-Idee-Coach.",
+          "updatedAt": "2026-09-23"
+        }
+      ],
+      "suggestedQuestions": [
+        "Welche KI-Leistungen bietet Schunera an?",
+        "Wie lange dauert das Erstgespräch?",
+        "Ich möchte einen Termin buchen."
+      ]
+    },
+    {
+      "slug": "atelier-beispiel",
+      "cardTokens": ["demo-karte"],
+      "status": "published",
+      "isDemo": true,
+      "displayName": "Mara Beispiel",
+      "givenName": "Mara",
+      "familyName": "Beispiel",
+      "role": "Strategie & Gestaltung",
+      "company": "Atelier Beispiel",
+      "city": "Hamburg",
+      "bio": "Ich begleite kleine Teams dabei, aus guten Ideen klare Marken und digitale Angebote zu machen.",
+      "email": "mara@example.com",
+      "phone": "",
+      "website": "",
+      "address": {
+        "street": "",
+        "postalCode": "",
+        "locality": "",
+        "country": "Deutschland"
+      },
+      "bookingOptions": [
+        {
+          "id": "kennenlernen",
+          "label": "Kennenlerngespräch",
+          "description": "Ein kurzes Gespräch zum gegenseitigen Kennenlernen.",
+          "durationMinutes": 20,
+          "url": "",
+          "active": true
+        }
+      ],
+      "offers": [
+        {
+          "id": "marken-workshop",
+          "title": "Marken-Workshop",
+          "description": "Ein gemeinsamer Startpunkt, um Positionierung, Zielgruppe und nächste Schritte zu schärfen.",
+          "active": true
+        }
+      ],
+      "knowledge": [
+        {
+          "id": "arbeitsweise",
+          "source": "Beispielprofil",
+          "version": "1",
+          "published": true,
+          "question": "Wie läuft eine Zusammenarbeit ab?",
+          "answer": "Wir starten mit einem Kennenlerngespräch, klären Ziel und Umfang und stimmen danach ein passendes Vorgehen ab. Ein konkretes Angebot gibt es erst nach diesem Gespräch.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "zielgruppen",
+          "source": "Beispielprofil",
+          "version": "1",
+          "published": true,
+          "question": "Für wen ist das Angebot geeignet?",
+          "answer": "Das Beispielangebot richtet sich an kleine Teams, die ihre Marke oder ihr digitales Angebot klarer aufstellen möchten.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "preise",
+          "source": "Beispielprofil",
+          "version": "1",
+          "published": true,
+          "question": "Was kostet die Zusammenarbeit?",
+          "answer": "Im Beispielprofil sind keine Preise freigegeben. Für eine belastbare Einschätzung braucht es zuerst ein Gespräch zu Ziel und Umfang.",
+          "updatedAt": "2026-09-23"
+        }
+      ],
+      "suggestedQuestions": [
+        "Was bietet ihr an?",
+        "Wie läuft eine Zusammenarbeit ab?",
+        "Für wen ist das geeignet?"
+      ]
+    }
+  ]
+}
