@@ -53,7 +53,15 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .message-row-user { justify-content: flex-end; }
 .message-avatar { width: 27px; height: 27px; font-size: 13px; }
 .message-bubble { max-width: min(88%, 450px); padding: 12px 14px; border: 1px solid #e9ede5; border-radius: 5px 16px 16px; color: #35433b; background: #f5f7f2; }
-.message-bubble > p { margin: 0; font-size: 12px; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
+.assistant-message-content { display: grid; gap: 9px; font-size: 13px; line-height: 1.65; overflow-wrap: anywhere; }
+.assistant-message-content > p, .assistant-message-content > h1, .assistant-message-content > h2, .assistant-message-content > h3 { margin: 0; }
+.assistant-message-content > h1, .assistant-message-content > h2, .assistant-message-content > h3 { color: #263d2f; font-size: 14px; line-height: 1.4; }
+.assistant-message-content ul, .assistant-message-content ol { display: grid; gap: 7px; margin: 0; padding-left: 20px; }
+.assistant-message-content li { padding-left: 2px; }
+.assistant-message-content li::marker { color: #78905e; }
+.assistant-message-content strong { color: #293d30; font-weight: 700; }
+.assistant-message-content code { padding: 1px 4px; border-radius: 4px; background: #e9eee4; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .92em; }
+.user-message-content { margin: 0; font-size: 13px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
 .message-citations { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 9px; margin-top: 8px; color: #738073; font-size: 9px; line-height: 1.5; }
 .message-citations > span { color: #899389; font-weight: 650; }
 .message-citations a { color: #506b40; text-decoration: underline; text-underline-offset: 2px; overflow-wrap: anywhere; }
@@ -155,12 +163,12 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
   .chat-header { min-height: max(68px, calc(68px + env(safe-area-inset-top))); padding: calc(12px + env(safe-area-inset-top)) 16px 12px; }
   .message-list { padding: 17px 13px 15px; }
   .message-bubble { max-width: min(90%, 450px); padding: 11px 12px; }
-  .message-bubble > p { font-size: 12px; }
+  .assistant-message-content, .user-message-content { font-size: 13px; }
   .chat-shortcuts { gap: 6px; padding: 0 12px 11px 47px; }
   .chat-shortcuts button { min-height: 42px; padding: 7px 10px; font-size: 9px; }
   .composer { min-height: 67px; padding: 8px 12px 8px 15px; }
   .send-button { width: 46px; height: 46px; }
-  .chat-disclaimer { padding: 0 12px calc(10px + env(safe-area-inset-bottom)); }
+  .chat-disclaimer { padding: 0 12px calc(10px + env(safe-area-inset-bottom)); font-size: 10px; }
 }
 
 @media (max-width: 360px) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ChatBooking } from "@/components/chat-booking";
 import type { BookingOption, Offer, Profile } from "@/lib/profile";
 
@@ -70,6 +70,78 @@ function OfferResult({ action, offers }: { action: Action; offers: Offer[] }) {
   return <article className="result-offer"><strong>{offer.title}</strong><span>{offer.description}</span></article>;
 }
 
+function renderInlineMarkdown(value: string): ReactNode[] {
+  return value.split(/(\*\*[^*\n]+\*\*|__[^_\n]+__|`[^`\n]+`)/g).map((part, index) => {
+    if ((part.startsWith("**") && part.endsWith("**")) || (part.startsWith("__") && part.endsWith("__"))) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+    if (part.startsWith("`") && part.endsWith("`")) return <code key={index}>{part.slice(1, -1)}</code>;
+    return part;
+  });
+}
+
+function AssistantMessageContent({ content }: { content: string }) {
+  const normalized = content
+    .replace(/\r\n?/g, "\n")
+    .replace(/([^\n])[\t ]+-[\t ]+(?=(?:\*\*|__)[^*\n]+?:(?:\*\*|__))/g, "$1\n- ")
+    .trim();
+  const blocks: ReactNode[] = [];
+  let paragraph: string[] = [];
+  let currentList: { type: "ul" | "ol"; items: string[] } | undefined;
+
+  function flushParagraph() {
+    if (paragraph.length === 0) return;
+    blocks.push(<p key={blocks.length}>{renderInlineMarkdown(paragraph.join(" "))}</p>);
+    paragraph = [];
+  }
+
+  function flushList() {
+    if (!currentList) return;
+    const list = currentList;
+    const items = list.items.map((item, index) => <li key={index}>{renderInlineMarkdown(item)}</li>);
+    blocks.push(list.type === "ul"
+      ? <ul key={blocks.length}>{items}</ul>
+      : <ol key={blocks.length}>{items}</ol>);
+    currentList = undefined;
+  }
+
+  for (const line of normalized.split("\n")) {
+    if (!line.trim()) {
+      flushParagraph();
+      flushList();
+      continue;
+    }
+
+    const heading = line.match(/^(#{1,3})\s+(.+)$/);
+    if (heading) {
+      flushParagraph();
+      flushList();
+      const Heading = `h${heading[1].length}` as "h1" | "h2" | "h3";
+      blocks.push(<Heading key={blocks.length}>{renderInlineMarkdown(heading[2])}</Heading>);
+      continue;
+    }
+
+    const unorderedItem = line.match(/^\s*[-*+]\s+(.+)$/);
+    const orderedItem = line.match(/^\s*\d+[.)]\s+(.+)$/);
+    const item = unorderedItem ?? orderedItem;
+    const listType = unorderedItem ? "ul" : orderedItem ? "ol" : undefined;
+    if (item && listType) {
+      flushParagraph();
+      if (currentList && currentList.type !== listType) flushList();
+      currentList ??= { type: listType, items: [] };
+      currentList.items.push(item[1]);
+      continue;
+    }
+
+    flushList();
+    paragraph.push(line.trim());
+  }
+
+  flushParagraph();
+  flushList();
+  return <div className="assistant-message-content">{blocks}</div>;
+}
+
 export function ChatAssistant({
   profile,
   bookingOptions,
@@ -79,7 +151,7 @@ export function ChatAssistant({
   bookingOptions: BookingOption[];
   offers: Offer[];
 }) {
-  const initialMessage = `Hallo! Ich bin der KI-Assistent von ${profile.displayName}${profile.company ? ` bei ${profile.company}` : ""}. Frag mich gern zu meiner Arbeit oder zum Erstgespräch. Für einen Termin schreib einfach „Termin buchen“.${profile.isDemo ? " Dieses Profil enthält noch Beispieldaten." : ""}`;
+  const initialMessage = `Hallo! Ich bin der digitale Assistent von ${profile.company}. Wir helfen dir gern bei Fragen zu ${profile.displayName}, unseren Leistungen und einem Erstgespräch. Wenn du einen Termin vereinbaren möchtest, schreib einfach „Termin buchen“.${profile.isDemo ? " Dieses Beispielprofil enthält Demonstrationsdaten." : ""}`;
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: initialMessage },
   ]);
@@ -165,12 +237,12 @@ export function ChatAssistant({
 
   return (
     <main className="chat-page">
-      <section className="chat-app" aria-label={`Chat mit dem KI-Assistenten von ${profile.displayName}`}>
+      <section className="chat-app" aria-label={`Chat mit ${profile.company}`}>
         <header className="chat-header">
           <div className="assistant-avatar" aria-hidden="true">✳</div>
           <div className="assistant-title">
-            <div><h1>Chat mit {profile.displayName}</h1><span className="ai-tag">KI</span></div>
-            <p>Assistent von {profile.company}</p>
+            <div><h1>Chat mit {profile.company}</h1><span className="ai-tag">KI</span></div>
+            <p>Fragen zu {profile.displayName}, unseren Leistungen und Terminen</p>
           </div>
           {profile.isDemo && <span className="demo-tag">DEMO</span>}
         </header>
@@ -187,7 +259,9 @@ export function ChatAssistant({
             <div className={`message-row ${message.role === "user" ? "message-row-user" : ""}`} key={`${index}-${message.role}`}>
               {message.role === "assistant" && <div className="message-avatar" aria-hidden="true">✳</div>}
               <div className={`message-bubble ${message.role === "user" ? "message-bubble-user" : ""}${message.action?.type === "show_booking_options" ? " message-bubble-booking" : ""}`}>
-                <p>{message.content}</p>
+                {message.role === "assistant"
+                  ? <AssistantMessageContent content={message.content} />
+                  : <p className="user-message-content">{message.content}</p>}
                 {message.role === "assistant" && message.citations && message.citations.length > 0 && (
                   <div className="message-citations" aria-label="Quellen zur Antwort">
                     <span>Quellen</span>
@@ -281,7 +355,7 @@ export function ChatAssistant({
             <span aria-hidden="true">↑</span>
           </button>
         </form>
-        <p className="chat-disclaimer">KI-Assistent · Antworten basieren auf freigegebenen Informationen.</p>
+        <p className="chat-disclaimer">KI-Assistent von {profile.company} · Antworten aus freigegebenen Informationen</p>
       </section>
     </main>
   );
