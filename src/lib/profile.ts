@@ -16,7 +16,8 @@ export type BookingOption = {
   description: string;
   durationMinutes: number;
   url: string;
-  provider?: "schunera";
+  provider?: "schunera" | "calcom";
+  calLink?: string;
   privacyUrl?: string;
   active: boolean;
 };
@@ -35,6 +36,8 @@ export type SocialMediaLink = {
 
 export type Profile = {
   slug: string;
+  chatTheme?: "mummentum-fusion";
+  isDefault?: boolean;
   cardTokens: string[];
   status: "draft" | "published" | "inactive";
   isDemo: boolean;
@@ -72,7 +75,9 @@ export function getProfileByCardToken(token: string): Profile | undefined {
 }
 
 export function getDefaultCardToken(): string {
-  return profiles.find((profile) => profile.status === "published")?.cardTokens[0] ?? "";
+  const profile = profiles.find((candidate) => candidate.status === "published" && candidate.isDefault)
+    ?? profiles.find((candidate) => candidate.status === "published");
+  return profile?.cardTokens[0] ?? "";
 }
 
 export function getPublishedKnowledge(profile: Profile): KnowledgeEntry[] {

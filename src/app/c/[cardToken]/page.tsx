@@ -28,22 +28,21 @@ export default async function CardPage({ params }: PageProps) {
   }
 
   return (
-    <main className="chat-page">
-      <ChatAssistant
-        profile={{
-          slug: profile.slug,
-          displayName: profile.displayName,
-          company: profile.company,
-          isDemo: profile.isDemo,
-          email: profile.email,
-          phone: profile.phone,
-          website: getPublicWebsite(profile),
-          socialMedia: profile.socialMedia ?? [],
-          suggestedQuestions: profile.suggestedQuestions,
-        }}
-        bookingOptions={getBookingOptions(profile)}
-        offers={getActiveOffers(profile)}
-      />
-    </main>
+    <ChatAssistant
+      profile={{
+        slug: profile.slug,
+        chatTheme: profile.chatTheme,
+        displayName: profile.displayName,
+        company: profile.company,
+        isDemo: profile.isDemo,
+        email: profile.email,
+        phone: profile.phone,
+        website: getPublicWebsite(profile),
+        socialMedia: profile.socialMedia ?? [],
+        suggestedQuestions: profile.suggestedQuestions,
+      }}
+      bookingOptions={getBookingOptions(profile)}
+      offers={getActiveOffers(profile)}
+    />
   );
 }

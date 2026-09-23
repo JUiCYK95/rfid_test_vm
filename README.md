@@ -11,19 +11,19 @@ npm install
 npm run dev
 ```
 
-Danach `http://localhost:3000` öffnen. Die Testkarte von Florian liegt unter `/c/florian`; das neutrale Beispielsprofil bleibt unter `/c/demo-karte` erreichbar.
+Danach `http://localhost:3000` öffnen. Die Startseite leitet zur mummentum-Variante unter `/c/vincent` weiter. Florian liegt unter `/c/florian`; das neutrale Beispielsprofil bleibt unter `/c/demo-karte` erreichbar.
 
 ## Chatverhalten
 
 - **Fragen:** Veröffentlichtes Wissen wird direkt im Chat beantwortet. Für offene Fragen kann ein serverseitiger Modellanbieter über `.env.local` konfiguriert werden. Ohne Modell antwortet der Chat aus passenden freigegebenen Fragen und Antworten und sagt bei Wissenslücken klar, dass keine bestätigte Antwort vorliegt.
 - **Kontakt:** Auf Wunsch zeigt der Chat freigegebene Kontaktdaten und eine vCard zum Speichern als Teil der Chatnachricht.
-- **Termin:** Bei Florian zeigt der Chat freie Zeiten, das Buchungsformular und die Bestätigung direkt in einer Chatnachricht. Die Verfügbarkeit kommt von Schuneras Buchungs-API. Beim Absenden gehen die Formulardaten an Schunera; Florian bestätigt den Termin anschließend per E-Mail. Andere Profile können weiterhin ihre freigegebenen Kalenderlinks verwenden.
+- **Termin:** Bei Florian zeigt der Chat freie Zeiten, das Buchungsformular und die Bestätigung direkt in einer Chatnachricht. Die Verfügbarkeit kommt von Schuneras Buchungs-API. Beim Absenden gehen die Formulardaten an Schunera; Florian bestätigt den Termin anschließend per E-Mail. Vincents Cal.com-Kalender wird direkt in der Chatnachricht eingebettet und wickelt die Buchung über den bestehenden mummentum-Terminablauf ab.
 
 Der Chat startet ohne Modellaufruf. Das LLM darf keine URLs oder Buchungen erfinden: Aktionsvorschläge werden anhand veröffentlichter Kontakt-, Angebots- und Buchungsdaten serverseitig geprüft.
 
 ## Inhalte konfigurieren
 
-Profile, Kartenkennungen, Kontaktfelder, Social-Media-Links, Angebote, Buchungslinks und freigegebene Wissenseinträge stehen in [`data/profile.json`](./data/profile.json). Das Profil `florian` enthält die öffentlich belegten Unternehmens- und Profildaten von Schunera und bindet die Buchung auf `schunera.de` als Chatablauf ein. Beispieldaten vor Veröffentlichung ersetzen. Die Datei ist in dieser Umsetzung die redaktionelle Quelle; Änderungen werden mit einem Anwendungs-Deployment veröffentlicht, die Kartenkennung kann dabei stabil bleiben.
+Profile, Kartenkennungen, Kontaktfelder, Social-Media-Links, Angebote, Buchungslinks und freigegebene Wissenseinträge stehen in [`data/profile.json`](./data/profile.json). Das Profil `florian` enthält die öffentlich belegten Unternehmens- und Profildaten von Schunera und bindet die Buchung auf `schunera.de` als Chatablauf ein. Das Profil `vincent` enthält die mummentum-Angaben, wählt das FUSION-Design profilbezogen aus und bettet den Cal.com-Kalender `mummentum/30min` ein. Beispieldaten vor Veröffentlichung ersetzen. Die Datei ist in dieser Umsetzung die redaktionelle Quelle; Änderungen werden mit einem Anwendungs-Deployment veröffentlicht, die Kartenkennung kann dabei stabil bleiben.
 
 ## Modellzugang
 
@@ -37,7 +37,7 @@ Pro Anfrage werden höchstens acht Chatnachrichten und die freigegebenen Informa
 
 - Die NFC-Kennung mit einer stabilen HTTPS-Domain auf eine Testkarte schreiben und auf den vereinbarten iPhone- und Android-Geräten prüfen.
 - Echte Profildaten und freigegebene Inhalte einsetzen.
-- Kalenderanbieter, Terminart und Buchungsbestätigung je Profil prüfen. Die Chatintegration `schunera` ist derzeit auf Florians Termin-API und dessen Formularfelder zugeschnitten.
+- Kalenderanbieter, Terminart und Buchungsbestätigung je Profil prüfen. Florians Integration nutzt Schuneras Termin-API und Formularfelder; Vincents Profil bettet den mummentum-Cal.com-Kalender im Chat ein.
 - Impressum, Datenschutz, LLM-Datenverarbeitung, Aufbewahrung und Hosting prüfen. Rechtliche Infoseiten und Administrationsoberfläche sind in dieser Chat-only-Version nicht enthalten.
 - Adminbereich mit Rollen/MFA, Datenbank, verteiltes Missbrauchslimit, Logs, Backups und Monitoring für den Produktionsbetrieb ergänzen.
 - Geräte-, Inhalts-, Sicherheits- und Wiederherstellungstests vor Freigabe durchführen.

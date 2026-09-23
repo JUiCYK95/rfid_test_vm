@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "project": {
+    "name": "nfc-business-card",
+    "productType": "multi-profile business-card chat",
+    "stack": [
+      "nextjs",
+      "react"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "src/app/globals.css"
+    ],
+    "components": [
+      "src/components/chat-assistant.tsx"
+    ],
+    "assets": [
+      "public/mummentum-mark.svg"
+    ],
+    "instructions": []
+  },
+  "design": {
+    "colorMode": "profile-scoped",
+    "colors": {
+      "--muted": {
+        "value": "#77827b",
+        "source": "src/app/globals.css"
+      },
+      "--fusion-canvas": {
+        "value": "#101010",
+        "source": "mummentum FUSION brand kit"
+      },
+      "--fusion-obsidian": {
+        "value": "#0b0b0b",
+        "source": "mummentum FUSION brand kit"
+      },
+      "--fusion-panel": {
+        "value": "#141414",
+        "source": "mummentum FUSION brand kit"
+      },
+      "--fusion-graphite-soft": {
+        "value": "#191919",
+        "source": "mummentum FUSION brand kit"
+      },
+      "--fusion-graphite": {
+        "value": "#212121",
+        "source": "mummentum FUSION brand kit"
+      },
+      "--fusion-smoke": {
+        "value": "#9c9c9c",
+        "source": "mummentum FUSION brand kit"
+      },
+      "--fusion-chalk": {
+        "value": "#f3f3f3",
+        "source": "mummentum FUSION brand kit"
+      }
+    },
+    "typography": {
+      "--fusion-sans": {
+        "value": "Geist, weight 400",
+        "source": "mummentum FUSION brand kit"
+      },
+      "--fusion-mono": {
+        "value": "Geist Mono, weight 400",
+        "source": "mummentum FUSION brand kit"
+      }
+    },
+    "spacing": {
+      "--fusion-grid": {
+        "value": "40px",
+        "source": "mummentum FUSION brand kit"
+      }
+    },
+    "radius": {
+      "--fusion-radius-standard": {
+        "value": "0 to 8px; pills only at full radius",
+        "source": "mummentum FUSION brand kit"
+      }
+    },
+    "shadows": {
+      "value": "none"
+    },
+    "motion": {},
+    "density": "focused chat"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [
+      "Keep the mummentum FUSION theme scoped to profiles that select it.",
+      "Use only the seven grayscale brand tokens, Geist and Geist Mono at weight 400, a continuous 40px grid, and 1px Graphite hairlines.",
+      "Use at most one filled Chalk action per view."
+    ],
+    "avoid": [
+      "Color accents, shadows, glow, gradients unrelated to the grid, and bold type in the FUSION chat."
+    ]
+  },
+  "decisions": [
+    {
+      "decision": "Vincent Mumme's /c/vincent chat uses the FUSION system. Existing profiles retain their current appearance.",
+      "reason": "The requested second version is for mummentum and should follow its supplied brand kit.",
+      "source": "User request and supplied mummentum FUSION brand kit"
+    }
+  ],
+  "evidence": [
+    {
+      "fact": "design.colorMode:profile-scoped",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "design.tokens",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "project.stack:nextjs",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-09-23T13:42:36.740Z"
+}

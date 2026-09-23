@@ -362,6 +362,151 @@
         "Wie läuft eine Zusammenarbeit ab?",
         "Für wen ist das geeignet?"
       ]
+    },
+    {
+      "slug": "vincent",
+      "chatTheme": "mummentum-fusion",
+      "cardTokens": ["vincent"],
+      "status": "published",
+      "isDemo": false,
+      "isDefault": true,
+      "displayName": "Vincent Mumme",
+      "givenName": "Vincent",
+      "familyName": "Mumme",
+      "role": "Gründer von mummentum",
+      "company": "mummentum",
+      "city": "Braunschweig",
+      "bio": "Vincent Mumme ist Gründer von mummentum. Wir helfen Unternehmen, geeignete KI-Anwendungen einzuordnen und Wissen, Prozesse, Daten und Verantwortung für den Arbeitsalltag zu strukturieren.",
+      "email": "kontakt@mummentum.de",
+      "phone": "+49 176 61069164",
+      "website": "https://www.mummentum.de/",
+      "socialMedia": [
+        {
+          "platform": "Instagram · @vincentmumme",
+          "url": "https://www.instagram.com/vincentmumme/"
+        },
+        {
+          "platform": "TikTok · @vincentmumme",
+          "url": "https://www.tiktok.com/@vincentmumme"
+        },
+        {
+          "platform": "YouTube · @mummentum",
+          "url": "https://www.youtube.com/@mummentum"
+        },
+        {
+          "platform": "LinkedIn · Vincent Mumme",
+          "url": "https://de.linkedin.com/in/vincentmumme"
+        }
+      ],
+      "address": {
+        "street": "",
+        "postalCode": "",
+        "locality": "Braunschweig",
+        "country": "Deutschland"
+      },
+      "bookingOptions": [
+        {
+          "id": "erstgespraech",
+          "label": "Kostenloses Erstgespräch",
+          "description": "30 Minuten zur Einordnung eurer Ausgangslage, Ziele und aktuellen Hürden.",
+          "durationMinutes": 30,
+          "url": "https://www.mummentum.de/erstgespraech",
+          "provider": "calcom",
+          "calLink": "mummentum/30min",
+          "privacyUrl": "https://www.mummentum.de/datenschutz",
+          "active": true
+        }
+      ],
+      "offers": [
+        {
+          "id": "ki-readiness-audit",
+          "title": "KI-Readiness Audit",
+          "description": "Wir prüfen Organisation, Wissen, Prozesse, Daten, Systeme und Risiken. Das Ergebnis ist eine Entscheidungsgrundlage mit priorisierten Anwendungen und nächsten Schritten.",
+          "active": true
+        },
+        {
+          "id": "foundation",
+          "title": "Foundation",
+          "description": "Wir ordnen relevante Quellen, Rollen, Zugriffe und Regeln, damit ein verlässlicher Kontext für die priorisierten Anwendungen entsteht.",
+          "active": true
+        },
+        {
+          "id": "businessos",
+          "title": "BusinessOS",
+          "description": "Ein gemeinsamer Arbeitskontext, mit dem Menschen und KI im Unternehmen verlässlich zusammenarbeiten können.",
+          "active": true
+        }
+      ],
+      "knowledge": [
+        {
+          "id": "mummentum-profil",
+          "source": "mummentum Website (https://www.mummentum.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Was macht mummentum?",
+          "answer": "Wir helfen Unternehmen zu klären, welche KI-Anwendungen sich lohnen und welche Grundlagen dafür nötig sind. Dazu bringen wir Wissen, Prozesse, Daten und Verantwortung in eine verlässliche Struktur, auf der passende Anwendungen im Arbeitsalltag funktionieren.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "vincent-mumme",
+          "source": "LinkedIn-Profil von Vincent Mumme (https://de.linkedin.com/in/vincentmumme)",
+          "version": "1",
+          "published": true,
+          "question": "Wer ist Vincent Mumme?",
+          "answer": "Vincent Mumme ist der Gründer von mummentum.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "ki-readiness-audit",
+          "source": "mummentum Website (https://www.mummentum.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Was ist ein KI-Readiness Audit?",
+          "answer": "Im KI-Readiness Audit prüfen wir die Ausgangslage eines Unternehmens, darunter Organisation, Wissen, Prozesse, Daten, Systeme und Risiken. Wir priorisieren sinnvolle KI-Anwendungen und erarbeiten ein klares Zielbild mit konkreten nächsten Schritten. Das Audit ist ein eigener, kostenpflichtiger Arbeitsschritt.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "businessos",
+          "source": "mummentum Website (https://www.mummentum.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Was ist BusinessOS?",
+          "answer": "BusinessOS ist ein gemeinsamer Arbeitskontext für Menschen und KI. Er verbindet relevantes Wissen, Prozesse und Daten mit klaren Quellen, Zuständigkeiten und Zugriffsregeln.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "erstgespraech",
+          "source": "mummentum Website und Erstgesprächseite (https://www.mummentum.de/erstgespraech)",
+          "version": "1",
+          "published": true,
+          "question": "Wie läuft das kostenlose Erstgespräch ab?",
+          "answer": "Das kostenlose Erstgespräch dauert 30 Minuten. Wir ordnen Ausgangslage, Ziel und aktuelle Hürden ein und prüfen, ob unser Ansatz passt. Du brauchst keine Unterlagen. Danach erhältst du eine Empfehlung zum nächsten Schritt.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "ablauf-zusammenarbeit",
+          "source": "mummentum Website (https://www.mummentum.de/)",
+          "version": "1",
+          "published": true,
+          "question": "Wie läuft eine Zusammenarbeit mit mummentum ab?",
+          "answer": "Wir arbeiten in vier Schritten: kostenloses Erstgespräch, KI-Readiness Audit, Foundation und BusinessOS. Nach jedem Schritt gibt es ein verwertbares Ergebnis. Der nächste Umfang wird erst nach dem vorherigen Schritt gemeinsam entschieden.",
+          "updatedAt": "2026-09-23"
+        },
+        {
+          "id": "kontakt",
+          "source": "mummentum Impressum (https://www.mummentum.de/impressum)",
+          "version": "1",
+          "published": true,
+          "question": "Wie kann ich mummentum kontaktieren?",
+          "answer": "Du erreichst uns per E-Mail unter kontakt@mummentum.de oder über unsere Website unter https://www.mummentum.de/.",
+          "updatedAt": "2026-09-23"
+        }
+      ],
+      "suggestedQuestions": [
+        "Was macht mummentum?",
+        "Was ist ein KI-Readiness Audit?",
+        "Wie läuft das kostenlose Erstgespräch ab?"
+      ]
     }
   ]
 }

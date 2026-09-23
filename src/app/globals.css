@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400&family=Geist+Mono:wght@400&display=swap');
+
 :root {
   --paper: #f2f2ed;
   --ink: #17251e;
@@ -87,6 +89,16 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .result-offer strong { font-size: 10px; }
 .result-offer span { color: #6c7870; font-size: 10px; line-height: 1.5; }
 .message-bubble-booking { width: min(450px, calc(100% - 35px)); max-width: calc(100% - 35px); }
+.message-bubble-cal-booking { width: min(760px, 100%); max-width: min(760px, 100%); }
+.cal-booking-card { overflow: hidden; border: 1px solid #212121; border-radius: 4px; color: #f3f3f3; background: #0b0b0b; }
+.cal-booking-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 14px; border-bottom: 1px solid #212121; }
+.cal-booking-heading > div { display: grid; gap: 5px; }
+.cal-booking-heading > div > span, .cal-booking-heading > span { color: #9c9c9c; font-family: var(--fusion-mono, ui-monospace, monospace); font-size: 9px; letter-spacing: .11em; }
+.cal-booking-heading strong { font-size: 12px; }
+.cal-booking-embed { width: 100%; min-height: 720px; overflow: hidden; background: #0b0b0b; }
+.cal-booking-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; padding: 11px 14px; border-top: 1px solid #212121; color: #9c9c9c; font-size: 9px; line-height: 1.5; }
+.cal-booking-footer a { color: #f3f3f3; text-decoration: underline; text-decoration-color: #555; text-underline-offset: 2px; }
+.cal-booking-footer a:hover { text-decoration-color: currentColor; }
 .booking-card { overflow: hidden; border: 1px solid #e1e7da; border-radius: 14px; color: #35433b; background: #fff; }
 .booking-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px; border-bottom: 1px solid #edf0e9; }
 .booking-card-heading > div { display: grid; gap: 4px; }
@@ -183,4 +195,112 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+.chat-page[data-theme="mummentum-fusion"] {
+  --fusion-canvas: #101010; --fusion-obsidian: #0b0b0b; --fusion-panel: #141414;
+  --fusion-graphite-soft: #191919; --fusion-graphite: #212121; --fusion-smoke: #9c9c9c;
+  --fusion-chalk: #f3f3f3; --fusion-sans: "Geist", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --fusion-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  display: grid; min-height: 100svh; place-items: center; padding: 40px 20px;
+  color: var(--fusion-chalk); background-color: var(--fusion-canvas);
+  background-image: linear-gradient(to right, var(--fusion-graphite) 1px, transparent 1px), linear-gradient(to bottom, var(--fusion-graphite) 1px, transparent 1px);
+  background-position: center; background-size: 40px 40px; font-family: var(--fusion-sans);
+  font-weight: 400; letter-spacing: 0.005em; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+.chat-page[data-theme="mummentum-fusion"] *, .chat-page[data-theme="mummentum-fusion"] *::before, .chat-page[data-theme="mummentum-fusion"] *::after { font-weight: 400; }
+.chat-page[data-theme="mummentum-fusion"] :is(button, a, input, textarea):focus-visible { outline: 1px solid var(--fusion-smoke); outline-offset: 3px; }
+.chat-page[data-theme="mummentum-fusion"] .chat-app {
+  width: min(1180px, 100%); height: min(940px, calc(100svh - 80px)); min-height: 0;
+  border: 0; border-right: 1px solid var(--fusion-graphite); border-left: 1px solid var(--fusion-graphite);
+  border-radius: 0; background: transparent; box-shadow: none;
+}
+.chat-page[data-theme="mummentum-fusion"] :is(.chat-header, .message-list, .chat-shortcuts, .composer, .chat-disclaimer, .chat-notice) {
+  width: min(760px, 100%); margin-right: auto; margin-left: auto;
+}
+.chat-page[data-theme="mummentum-fusion"] .chat-header { min-height: 88px; gap: 14px; padding: 18px 20px; border-bottom-color: var(--fusion-graphite); }
+.chat-page[data-theme="mummentum-fusion"] :is(.assistant-avatar, .message-avatar) {
+  color: var(--fusion-chalk); background: var(--fusion-obsidian); border: 1px solid var(--fusion-graphite); border-radius: 4px;
+}
+.chat-page[data-theme="mummentum-fusion"] .assistant-avatar { width: 40px; height: 40px; font-size: 0; }
+.chat-page[data-theme="mummentum-fusion"] .message-avatar { width: 26px; height: 26px; font-size: 0; }
+.chat-page[data-theme="mummentum-fusion"] .mummentum-mark {
+  display: block; width: 23px; height: 16px; background: var(--fusion-chalk);
+  -webkit-mask: url("/mummentum-mark.svg") center / contain no-repeat; mask: url("/mummentum-mark.svg") center / contain no-repeat;
+}
+.chat-page[data-theme="mummentum-fusion"] .message-avatar .mummentum-mark { width: 16px; height: 12px; }
+.chat-page[data-theme="mummentum-fusion"] .assistant-title h1 { color: var(--fusion-chalk); font-size: 18px; letter-spacing: -0.02em; }
+.chat-page[data-theme="mummentum-fusion"] :is(.assistant-title p, .ai-tag, .demo-tag, .date-divider, .chat-disclaimer) {
+  color: var(--fusion-smoke); font-family: var(--fusion-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.chat-page[data-theme="mummentum-fusion"] .assistant-title p { margin-top: 7px; line-height: 1.5; letter-spacing: 0.08em; }
+.chat-page[data-theme="mummentum-fusion"] :is(.ai-tag, .demo-tag) {
+  min-width: 0; height: auto; padding: 5px 8px; border: 1px solid var(--fusion-graphite);
+  border-radius: 9999px; background: transparent;
+}
+.chat-page[data-theme="mummentum-fusion"] .message-list { gap: 18px; padding: 24px 20px; scrollbar-color: var(--fusion-graphite) transparent; }
+.chat-page[data-theme="mummentum-fusion"] .date-divider { font-size: 10px; }
+.chat-page[data-theme="mummentum-fusion"] .date-divider::before, .chat-page[data-theme="mummentum-fusion"] .date-divider::after { background: var(--fusion-graphite); }
+.chat-page[data-theme="mummentum-fusion"] .message-row { gap: 10px; }
+.chat-page[data-theme="mummentum-fusion"] .message-bubble {
+  max-width: min(88%, 560px); padding: 14px 16px; border: 1px solid var(--fusion-graphite);
+  border-radius: 4px; color: var(--fusion-chalk); background: var(--fusion-panel);
+}
+.chat-page[data-theme="mummentum-fusion"] .message-bubble-cal-booking { width: min(760px, 100%); max-width: min(760px, 100%); }
+.chat-page[data-theme="mummentum-fusion"] :is(.assistant-message-content, .user-message-content) { color: var(--fusion-chalk); font-size: 15px; line-height: 1.6; }
+.chat-page[data-theme="mummentum-fusion"] :is(.assistant-message-content > h1, .assistant-message-content > h2, .assistant-message-content > h3, .assistant-message-content strong) { color: var(--fusion-chalk); }
+.chat-page[data-theme="mummentum-fusion"] .assistant-message-content li::marker { color: var(--fusion-smoke); }
+.chat-page[data-theme="mummentum-fusion"] .assistant-message-content code { border-radius: 4px; color: var(--fusion-chalk); background: var(--fusion-graphite-soft); font-family: var(--fusion-mono); }
+.chat-page[data-theme="mummentum-fusion"] :is(.message-citations, .message-citations > span) { color: var(--fusion-smoke); }
+.chat-page[data-theme="mummentum-fusion"] :is(.message-citations a, .result-contact > a:not(.result-primary)) { color: var(--fusion-chalk); text-decoration-color: var(--fusion-smoke); }
+.chat-page[data-theme="mummentum-fusion"] .message-bubble-user { border-color: var(--fusion-graphite); border-radius: 4px; color: var(--fusion-chalk); background: var(--fusion-obsidian); }
+.chat-page[data-theme="mummentum-fusion"] .typing-bubble i { background: var(--fusion-smoke); }
+.chat-page[data-theme="mummentum-fusion"] .message-results { display: grid; gap: 8px; }
+.chat-page[data-theme="mummentum-fusion"] :is(.result-contact, .result-options) { display: grid; gap: 8px; }
+.chat-page[data-theme="mummentum-fusion"] :is(.result-primary, .result-offer) {
+  border: 1px solid var(--fusion-graphite); border-radius: 4px; color: var(--fusion-chalk); background: var(--fusion-obsidian); box-shadow: none;
+}
+.chat-page[data-theme="mummentum-fusion"] .result-primary { min-height: 58px; transition: background-color 0.15s ease, border-color 0.15s ease; }
+.chat-page[data-theme="mummentum-fusion"] .result-primary:hover { border-color: var(--fusion-smoke); background: var(--fusion-graphite-soft); }
+.chat-page[data-theme="mummentum-fusion"] .result-icon { border: 1px solid var(--fusion-graphite); border-radius: 4px; color: var(--fusion-chalk); background: var(--fusion-panel); }
+.chat-page[data-theme="mummentum-fusion"] :is(.result-primary small, .result-primary > span:last-child, .result-offer span) { color: var(--fusion-smoke); }
+.chat-page[data-theme="mummentum-fusion"] .chat-shortcuts { gap: 8px; padding: 0 20px 16px; }
+.chat-page[data-theme="mummentum-fusion"] .chat-shortcuts button {
+  min-height: 40px; padding: 8px 12px; border: 1px solid var(--fusion-graphite); border-radius: 9999px;
+  color: var(--fusion-chalk); background: transparent; font-family: var(--fusion-mono);
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.chat-page[data-theme="mummentum-fusion"] .chat-shortcuts button:hover { border-color: var(--fusion-smoke); background: var(--fusion-graphite-soft); }
+.chat-page[data-theme="mummentum-fusion"] .chat-shortcuts button span { color: var(--fusion-smoke); }
+.chat-page[data-theme="mummentum-fusion"] .chat-notice { padding: 10px 20px 0; color: var(--fusion-smoke); font-size: 12px; }
+.chat-page[data-theme="mummentum-fusion"] .composer { min-height: 76px; gap: 12px; padding: 14px 20px; border-top-color: var(--fusion-graphite); }
+.chat-page[data-theme="mummentum-fusion"] .composer input {
+  min-height: 48px; padding: 10px 12px; border: 1px solid var(--fusion-graphite); border-radius: 6px;
+  color: var(--fusion-chalk); background: transparent; font-size: 15px;
+}
+.chat-page[data-theme="mummentum-fusion"] .composer input::placeholder { color: var(--fusion-smoke); }
+.chat-page[data-theme="mummentum-fusion"] .send-button {
+  width: 48px; height: 48px; border: 1px solid var(--fusion-chalk); border-radius: 9999px;
+  color: var(--fusion-canvas); background: var(--fusion-chalk); font-family: var(--fusion-mono); font-size: 20px;
+  transition: opacity 0.15s ease;
+}
+.chat-page[data-theme="mummentum-fusion"] .send-button:hover:not(:disabled) { transform: none; background: var(--fusion-chalk); opacity: 0.82; }
+.chat-page[data-theme="mummentum-fusion"] .send-button:disabled { color: var(--fusion-canvas); background: var(--fusion-chalk); cursor: default; opacity: 0.45; }
+.chat-page[data-theme="mummentum-fusion"] .chat-disclaimer { padding: 0 20px 18px; text-align: left; line-height: 1.5; }
+@media (max-width: 600px) {
+  .chat-page[data-theme="mummentum-fusion"] { display: grid; min-height: 100svh; padding: 0; place-items: stretch; }
+  .chat-page[data-theme="mummentum-fusion"] .chat-app { width: 100%; height: 100svh; min-height: 0; border-right: 0; border-left: 0; }
+  .chat-page[data-theme="mummentum-fusion"] .chat-header { min-height: max(76px, calc(76px + env(safe-area-inset-top))); padding: calc(12px + env(safe-area-inset-top)) 16px 12px; }
+  .chat-page[data-theme="mummentum-fusion"] .message-list { padding: 18px 13px 16px; }
+  .chat-page[data-theme="mummentum-fusion"] .message-bubble { max-width: min(90%, 520px); padding: 12px 13px; }
+  .chat-page[data-theme="mummentum-fusion"] :is(.assistant-message-content, .user-message-content) { font-size: 14px; }
+  .chat-page[data-theme="mummentum-fusion"] .chat-shortcuts { gap: 6px; padding: 0 12px 11px; }
+  .chat-page[data-theme="mummentum-fusion"] .chat-shortcuts button { min-height: 40px; padding: 7px 10px; font-size: 9px; }
+  .chat-page[data-theme="mummentum-fusion"] .composer { min-height: 67px; padding: 8px 12px; }
+  .chat-page[data-theme="mummentum-fusion"] .send-button { width: 46px; height: 46px; }
+  .chat-page[data-theme="mummentum-fusion"] .chat-disclaimer { padding: 0 12px calc(10px + env(safe-area-inset-bottom)); font-size: 9px; }
+}
+@media (max-width: 360px) {
+  .chat-page[data-theme="mummentum-fusion"] .chat-header { gap: 9px; padding-right: 12px; padding-left: 12px; }
+  .chat-page[data-theme="mummentum-fusion"] .assistant-title h1 { font-size: 16px; }
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ChatBooking } from "@/components/chat-booking";
+import { ChatCalBooking } from "@/components/chat-cal-booking";
 import type { BookingOption, Offer, Profile } from "@/lib/profile";
 
 type Action =
@@ -20,7 +21,7 @@ type Message = {
 
 type Citation = { title: string; url: string };
 
-type ChatProfile = Pick<Profile, "slug" | "displayName" | "company" | "isDemo" | "email" | "phone" | "suggestedQuestions"> & {
+type ChatProfile = Pick<Profile, "slug" | "chatTheme" | "displayName" | "company" | "isDemo" | "email" | "phone" | "suggestedQuestions"> & {
   website?: string;
   socialMedia: NonNullable<Profile["socialMedia"]>;
 };
@@ -236,10 +237,12 @@ export function ChatAssistant({
   ];
 
   return (
-    <main className="chat-page">
+    <main className="chat-page" data-theme={profile.chatTheme ?? "default"}>
       <section className="chat-app" aria-label={`Chat mit ${profile.company}`}>
         <header className="chat-header">
-          <div className="assistant-avatar" aria-hidden="true">✳</div>
+          <div className="assistant-avatar" aria-hidden="true">
+            {profile.chatTheme === "mummentum-fusion" ? <span className="mummentum-mark" /> : "✳"}
+          </div>
           <div className="assistant-title">
             <div><h1>Chat mit {profile.company}</h1><span className="ai-tag">KI</span></div>
             <p>Fragen zu {profile.displayName}, unseren Leistungen und Terminen</p>
@@ -257,8 +260,12 @@ export function ChatAssistant({
           <div className="date-divider"><span>CHAT</span></div>
           {messages.map((message, index) => (
             <div className={`message-row ${message.role === "user" ? "message-row-user" : ""}`} key={`${index}-${message.role}`}>
-              {message.role === "assistant" && <div className="message-avatar" aria-hidden="true">✳</div>}
-              <div className={`message-bubble ${message.role === "user" ? "message-bubble-user" : ""}${message.action?.type === "show_booking_options" ? " message-bubble-booking" : ""}`}>
+              {message.role === "assistant" && (
+                <div className="message-avatar" aria-hidden="true">
+                  {profile.chatTheme === "mummentum-fusion" ? <span className="mummentum-mark" /> : "✳"}
+                </div>
+              )}
+              <div className={`message-bubble ${message.role === "user" ? "message-bubble-user" : ""}${message.action?.type === "show_booking_options" ? " message-bubble-booking" : ""}${message.action?.type === "show_booking_options" && bookingOptions.some((option) => option.provider === "calcom") ? " message-bubble-cal-booking" : ""}`}>
                 {message.role === "assistant"
                   ? <AssistantMessageContent content={message.content} />
                   : <p className="user-message-content">{message.content}</p>}
@@ -297,6 +304,8 @@ export function ChatAssistant({
                       <div className="result-options">
                         {bookingOptions.map((option) => option.provider === "schunera" ? (
                           <ChatBooking key={option.id} profileSlug={profile.slug} option={option} />
+                        ) : option.provider === "calcom" && option.calLink ? (
+                          <ChatCalBooking key={option.id} option={option} />
                         ) : (
                           <a className="result-primary" href={option.url} target="_blank" rel="noreferrer" key={option.id}>
                             <span className="result-icon" aria-hidden="true">◷</span>
@@ -324,7 +333,9 @@ export function ChatAssistant({
           ))}
           {pending && (
             <div className="message-row" aria-label="Antwort wird erstellt">
-              <div className="message-avatar" aria-hidden="true">✳</div>
+              <div className="message-avatar" aria-hidden="true">
+                {profile.chatTheme === "mummentum-fusion" ? <span className="mummentum-mark" /> : "✳"}
+              </div>
               <div className="message-bubble typing-bubble"><i /><i /><i /></div>
             </div>
           )}
