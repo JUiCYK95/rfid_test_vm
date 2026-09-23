@@ -59,6 +59,7 @@ export default async function CardPage({ params }: PageProps) {
 
   return (
     <ChatAssistant
+      key={profile.slug}
       profile={{
         slug: profile.slug,
         chatTheme: profile.chatTheme,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { BookingOption } from "@/lib/profile";
 
 type CalNamespace = ((...args: unknown[]) => void) & { q?: unknown[][] };
@@ -88,6 +88,36 @@ function getCalApi(): CalApi {
 export function ChatCalBooking({ option }: { option: BookingOption }) {
   const embedRef = useRef<HTMLDivElement>(null);
   const initialized = useRef(false);
+  const [loadState, setLoadState] = useState<"loading" | "ready" | "unavailable">("loading");
+
+  useEffect(() => {
+    const element = embedRef.current;
+    if (!element || !option.calLink) return;
+
+    let frame: HTMLIFrameElement | null = null;
+    const markReadyIfVisible = () => {
+      if (frame && getComputedStyle(frame).visibility !== "hidden") setLoadState("ready");
+    };
+    const onLoad = () => window.requestAnimationFrame(markReadyIfVisible);
+    const watchFrame = () => {
+      const nextFrame = element.querySelector("iframe");
+      if (nextFrame && nextFrame !== frame) {
+        frame?.removeEventListener("load", onLoad);
+        frame = nextFrame;
+        frame.addEventListener("load", onLoad);
+      }
+      markReadyIfVisible();
+    };
+    const observer = new MutationObserver(watchFrame);
+    observer.observe(element, { attributes: true, attributeFilter: ["style", "class"], childList: true, subtree: true });
+    const timeout = window.setTimeout(() => setLoadState((current) => current === "ready" ? current : "unavailable"), 20_000);
+    watchFrame();
+    return () => {
+      observer.disconnect();
+      frame?.removeEventListener("load", onLoad);
+      window.clearTimeout(timeout);
+    };
+  }, [option.calLink]);
 
   useEffect(() => {
     const element = embedRef.current;
@@ -118,9 +148,20 @@ export function ChatCalBooking({ option }: { option: BookingOption }) {
         </div>
         <span aria-hidden="true">CAL.COM</span>
       </header>
-      <div ref={embedRef} className="cal-booking-embed" />
+      <div className="cal-booking-body" data-state={loadState}>
+        <div ref={embedRef} className="cal-booking-embed" />
+        {loadState !== "ready" && (
+          <div className="cal-booking-status" role="status">
+            {loadState === "loading" ? (
+              <><span className="cal-booking-pulse" aria-hidden="true" /><span>Kalender wird geladen …</span></>
+            ) : (
+              <><strong>Der Kalender ist gerade nicht erreichbar.</strong><span>Du kannst das Erstgespräch auf der Buchungsseite auswählen.</span><a href={option.url} target="_blank" rel="noreferrer">Buchungsseite öffnen ↗</a></>
+            )}
+          </div>
+        )}
+      </div>
       <footer className="cal-booking-footer">
-        <span>Die Terminbuchung wird über Cal.com abgewickelt.</span>
+        <span>Die Anfrage läuft über Cal.com und wird von mummentum persönlich bestätigt.</span>
         <span>
           <a href={option.url} target="_blank" rel="noreferrer">Buchungsseite separat öffnen ↗</a>
           {option.privacyUrl && <> · <a href={option.privacyUrl} target="_blank" rel="noreferrer">Datenschutz</a></>}

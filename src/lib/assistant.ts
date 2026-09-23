@@ -86,7 +86,9 @@ export function answerFromProfileData(profile: Profile, question: string): Assis
     }
     const names = options.map((option) => option.label).join(", ");
     return {
-      message: `Wir haben folgende Terminoption${options.length === 1 ? " für dich" : "en für dich"}: ${names}. Wähle eine Option direkt hier im Chat aus.`,
+      message: profile.chatTheme === "mummentum-fusion" && options.length === 1
+        ? `Wähle hier einen freien Termin für „${options[0].label}“ (${options[0].durationMinutes} Minuten).`
+        : `Wir haben folgende Terminoption${options.length === 1 ? " für dich" : "en für dich"}: ${names}. Wähle eine Option direkt hier im Chat aus.`,
       action: { type: "show_booking_options" },
     };
   }

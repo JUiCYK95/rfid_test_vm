@@ -107,6 +107,17 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   const question = messages[messages.length - 1]?.content;
   const chatMessages = messages as Array<{ role: "user" | "assistant"; content: string }>;
+  // Approved prompts already belong to this profile and have published answers.
+  // Serve them directly so the primary paths stay responsive during AI outages.
+  if (question && (profile.suggestedQuestions.includes(question) || [
+    "Ich möchte ein kostenloses Erstgespräch buchen.",
+    "Ich möchte einen Termin buchen.",
+    "Bitte sende mir den Kontakt.",
+    ...(profile.chatTheme === "mummentum-fusion" ? ["Wie läuft eine Zusammenarbeit mit mummentum ab?"] : []),
+  ].includes(question))) {
+    const profileAnswer = answerFromProfileData(profile, question);
+    if (profileAnswer) return json(profileAnswer);
+  }
   if (!hasConfiguredAssistant()) {
     if (question) {
       const profileAnswer = answerFromProfileData(profile, question);

@@ -152,22 +152,40 @@ export function ChatAssistant({
   bookingOptions: BookingOption[];
   offers: Offer[];
 }) {
+  const isFusion = profile.chatTheme === "mummentum-fusion";
   const initialMessage = `Hallo! Ich bin der digitale Assistent von ${profile.company}. Wir helfen dir gern bei Fragen zu ${profile.displayName}, unseren Leistungen und einem Erstgespräch. Wenn du einen Termin vereinbaren möchtest, schreib einfach „Termin buchen“.${profile.isDemo ? " Dieses Beispielprofil enthält Demonstrationsdaten." : ""}`;
-  const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: initialMessage },
-  ]);
+  const [messages, setMessages] = useState<Message[]>(isFusion ? [] : [{ role: "assistant", content: initialMessage }]);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
   const [notice, setNotice] = useState("");
+  const [retryText, setRetryText] = useState<string | null>(null);
   const sessionReady = useRef(false);
   const listRef = useRef<HTMLDivElement>(null);
   const shouldStickToBottom = useRef(true);
 
   useEffect(() => {
-    if (shouldStickToBottom.current && listRef.current) {
-      listRef.current.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
+    const list = listRef.current;
+    if (!list || !shouldStickToBottom.current) return;
+    const latest = messages.at(-1);
+    if (!pending && latest?.action?.type === "show_booking_options") {
+      const rows = list.querySelectorAll<HTMLElement>(".message-row");
+      rows.item(rows.length - 1)?.scrollIntoView({ block: "start", behavior: "smooth" });
+      return;
     }
+    list.scrollTo({ top: list.scrollHeight, behavior: "smooth" });
   }, [messages, pending]);
+
+  useEffect(() => {
+    if (!isFusion || !window.visualViewport) return;
+    const viewport = window.visualViewport;
+    const updateHeight = () => document.documentElement.style.setProperty("--fusion-viewport-height", `${Math.round(viewport.height)}px`);
+    updateHeight();
+    viewport.addEventListener("resize", updateHeight);
+    return () => {
+      viewport.removeEventListener("resize", updateHeight);
+      document.documentElement.style.removeProperty("--fusion-viewport-height");
+    };
+  }, [isFusion]);
 
   function updateScrollPreference() {
     const list = listRef.current;
@@ -175,14 +193,17 @@ export function ChatAssistant({
     shouldStickToBottom.current = list.scrollHeight - list.scrollTop - list.clientHeight < 96;
   }
 
-  async function sendMessage(textValue?: string) {
+  async function sendMessage(textValue?: string, retry = false) {
     const text = (textValue ?? input).trim();
     if (!text || pending) return;
 
-    const updatedMessages = [...messages, { role: "user" as const, content: text }];
-    setMessages(updatedMessages);
-    setInput("");
+    const updatedMessages = retry ? messages : [...messages, { role: "user" as const, content: text }];
+    if (!retry) {
+      setMessages(updatedMessages);
+      setInput("");
+    }
     setNotice("");
+    setRetryText(null);
     setPending(true);
     shouldStickToBottom.current = true;
 
@@ -202,10 +223,12 @@ export function ChatAssistant({
       });
       const payload = (await response.json()) as { message?: unknown; action?: unknown; citations?: unknown; error?: unknown };
       if (!response.ok || typeof payload.message !== "string") {
+        if (response.status === 401) sessionReady.current = false;
         const errorText = typeof payload.error === "string"
           ? payload.error
           : "Ich konnte die Nachricht gerade nicht beantworten. Versuch es bitte noch einmal.";
-        setMessages((current) => [...current, { role: "assistant", content: errorText }]);
+        setNotice(errorText);
+        setRetryText(text);
         return;
       }
 
@@ -224,7 +247,8 @@ export function ChatAssistant({
         },
       ]);
     } catch {
-      setNotice("Die Verbindung ist gerade unterbrochen. Deine Nachricht bleibt in diesem Chat, du kannst es erneut versuchen.");
+      setNotice("Die Verbindung ist gerade unterbrochen. Deine Nachricht ist noch im Chat.");
+      setRetryText(text);
     } finally {
       setPending(false);
     }
@@ -242,7 +266,11 @@ export function ChatAssistant({
       ))}
     </div>
   );
-  const showShortcuts = messages.length === 1;
+  const showShortcuts = !isFusion && messages.length === 1;
+  const lastMessage = messages.at(-1);
+  const followUps = isFusion && !pending && !retryText && lastMessage?.role === "assistant" && lastMessage.action?.type !== "show_booking_options"
+    ? profile.suggestedQuestions.filter((question) => !messages.some((message) => message.role === "user" && message.content === question)).slice(0, 2)
+    : [];
 
   return (
     <main className="chat-page" data-theme={profile.chatTheme ?? "default"}>
@@ -252,22 +280,43 @@ export function ChatAssistant({
             {profile.chatTheme === "mummentum-fusion" ? <span className="mummentum-mark" /> : "✳"}
           </div>
           <div className="assistant-title">
-            <div><h1>Chat mit {profile.company}</h1><span className="ai-tag">KI</span></div>
-            <p>Fragen zu {profile.displayName}, unseren Leistungen und Terminen</p>
+            <div><h1>{isFusion ? "mummentum" : `Chat mit ${profile.company}`}</h1><span className="ai-tag">KI</span></div>
+            <p>{isFusion ? "VINCENT MUMME · KI-READINESS" : `Fragen zu ${profile.displayName}, unseren Leistungen und Terminen`}</p>
           </div>
           {profile.isDemo && <span className="demo-tag">DEMO</span>}
         </header>
 
         <div
-          className={`message-list${profile.chatTheme === "mummentum-fusion" && showShortcuts ? " message-list-welcome" : ""}`}
+          className={`message-list${isFusion && messages.length === 0 ? " message-list-welcome" : ""}`}
           ref={listRef}
           onScroll={updateScrollPreference}
           aria-live="polite"
           aria-relevant="additions text"
         >
-          <div className="date-divider"><span>CHAT</span></div>
+          {isFusion && messages.length === 0 ? (
+            <section className="fusion-welcome" aria-label="Einstieg bei mummentum">
+              <div className="fusion-welcome-topline">
+                <span>01 / KI-READINESS</span>
+                <span aria-hidden="true" className="fusion-welcome-mark mummentum-mark" />
+              </div>
+              <h2>KI, die im Alltag funktioniert.</h2>
+              <p className="fusion-welcome-intro">Wir klären, welche Anwendungen sich für euer Unternehmen lohnen und welche Grundlage dafür nötig ist. Frag mich nach unserem Vorgehen oder starte mit einem Erstgespräch.</p>
+              <div className="fusion-welcome-actions" aria-label="Gespräch beginnen">
+                <button type="button" className="fusion-welcome-primary" disabled={pending} onClick={() => void sendMessage("Ich möchte ein kostenloses Erstgespräch buchen.")}>
+                  <span>Kostenloses Erstgespräch</span><span aria-hidden="true">↗</span>
+                </button>
+                <button type="button" className="fusion-welcome-secondary" disabled={pending} onClick={() => void sendMessage("Was ist ein KI-Readiness Audit?")}>
+                  <span>KI-Readiness Audit</span><span aria-hidden="true">↗</span>
+                </button>
+                <button type="button" className="fusion-welcome-secondary" disabled={pending} onClick={() => void sendMessage("Wie läuft eine Zusammenarbeit mit mummentum ab?")}>
+                  <span>Unser Vorgehen</span><span aria-hidden="true">↗</span>
+                </button>
+              </div>
+              <p className="fusion-welcome-note">ERSTGESPRÄCH / 30 MINUTEN / KEINE UNTERLAGEN NÖTIG</p>
+            </section>
+          ) : <div className="date-divider"><span>CHAT</span></div>}
           {messages.map((message, index) => (
-            <div className={`message-row ${message.role === "user" ? "message-row-user" : ""}`} key={`${index}-${message.role}`}>
+            <div className={`message-row ${message.role === "user" ? "message-row-user" : ""}${isFusion && message.action?.type === "show_booking_options" ? " message-row-booking" : ""}`} key={`${index}-${message.role}`}>
               {message.role === "assistant" && (
                 <div className="message-avatar" aria-hidden="true">
                   {profile.chatTheme === "mummentum-fusion" ? <span className="mummentum-mark" /> : "✳"}
@@ -340,19 +389,29 @@ export function ChatAssistant({
             </div>
           ))}
           {pending && (
-            <div className="message-row" aria-label="Antwort wird erstellt">
+            <div className="message-row" role="status" aria-label="Antwort wird erstellt">
               <div className="message-avatar" aria-hidden="true">
                 {profile.chatTheme === "mummentum-fusion" ? <span className="mummentum-mark" /> : "✳"}
               </div>
-              <div className="message-bubble typing-bubble"><i /><i /><i /></div>
+              <div className="message-bubble typing-bubble"><i /><i /><i /><span className="sr-only">Antwort wird erstellt</span></div>
             </div>
           )}
-          {profile.chatTheme === "mummentum-fusion" && showShortcuts && renderShortcuts("chat-shortcuts chat-shortcuts-in-thread")}
+          {followUps.length > 0 && (
+            <div className="chat-followups" aria-label="Weitere Fragen">
+              <span>WEITERFRAGEN</span>
+              {followUps.map((question) => <button type="button" key={question} onClick={() => void sendMessage(question)}>{question}<span aria-hidden="true">↗</span></button>)}
+            </div>
+          )}
         </div>
 
-        {showShortcuts && renderShortcuts(profile.chatTheme === "mummentum-fusion" ? "chat-shortcuts chat-shortcuts-docked" : "chat-shortcuts")}
+        {showShortcuts && renderShortcuts("chat-shortcuts")}
 
-        {notice && <p className="chat-notice" role="status">{notice}</p>}
+        {notice && (
+          <div className="chat-notice" role="alert">
+            <span>{notice}</span>
+            {retryText && <button type="button" disabled={pending} onClick={() => void sendMessage(retryText, true)}>Erneut versuchen ↗</button>}
+          </div>
+        )}
         <form className="composer" onSubmit={(event) => { event.preventDefault(); void sendMessage(); }}>
           <label className="sr-only" htmlFor="chat-input">Nachricht</label>
           <input
@@ -363,13 +422,22 @@ export function ChatAssistant({
             onChange={(event) => setInput(event.target.value)}
             placeholder="Schreib eine Nachricht …"
             autoComplete="off"
+            enterKeyHint="send"
             disabled={pending}
           />
           <button className="send-button" type="submit" disabled={pending || !input.trim()} aria-label="Nachricht senden">
             <span aria-hidden="true">↑</span>
           </button>
         </form>
-        <p className="chat-disclaimer">KI-Assistent von {profile.company} · Antworten aus freigegebenen Informationen</p>
+        <footer className="chat-disclaimer">
+          <span>KI-Assistent von {profile.company} · Antworten aus freigegebenen Informationen</span>
+          {isFusion && (
+            <nav aria-label="Rechtliche Informationen">
+              <a href="https://www.mummentum.de/datenschutz" target="_blank" rel="noreferrer">Datenschutz</a>
+              <a href="https://www.mummentum.de/impressum" target="_blank" rel="noreferrer">Impressum</a>
+            </nav>
+          )}
+        </footer>
       </section>
     </main>
   );

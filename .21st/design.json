@@ -104,6 +104,11 @@
       "decision": "Vincent Mumme's /c/vincent chat uses the FUSION system. Existing profiles retain their current appearance.",
       "reason": "The requested second version is for mummentum and should follow its supplied brand kit.",
       "source": "User request and supplied mummentum FUSION brand kit"
+    },
+    {
+      "decision": "The Vincent chat opens with a concise FUSION introduction, one filled booking action, and two secondary topic actions. Chat text stays at 16px on mobile, and the booking embed has loading and fallback states.",
+      "reason": "The user approved the premium-quality plan and reported that the earlier mobile layout looked awkward.",
+      "source": "User approval of the UX plan on 2026-09-24"
     }
   ],
   "evidence": [
